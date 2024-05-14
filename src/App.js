@@ -4,7 +4,7 @@ import "./styles.css";
 
 export default function App() {
   const user = fetchUser();
-
+  console.log(user);
   return (
     <div className="App">
       <nav className="navbar">
@@ -20,8 +20,6 @@ export default function App() {
 
         */}
       </nav>
-
-
     </div>
   );
 }
