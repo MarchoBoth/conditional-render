@@ -1,25 +1,40 @@
-import { fetchUser } from "./utils";
-import { Logo } from "./Logo";
-import "./styles.css";
+import { fetchUser } from './utils';
+import { Logo } from './Logo';
+import './styles.css';
 
 export default function App() {
   const user = fetchUser();
   console.log(user);
   return (
     <div className="App">
-      <nav className="navbar">
+      <nav className="navbar flex justify-between items-center p-4 bg-gray-200">
         <Logo />
 
-        {/* Write your code : 
-          - if the user is not logged in : render a button that says "login"
-
-          - if the user is logged in :
-            render a button that says logout and
-              - if the user has a username : render a greeting message with the username "Welcome username !"
-              - if the user does not have a user name : render "Logged and Please complete your username!""
-
-        */}
+        {/* Kondisi pertama jika user belum login */}
+        {!user.isLoggedIn ? (
+          <button className="bg-blue-500 text-white px-4 py-2 rounded">
+            Login
+          </button>
+        ) : (
+          // Kondisi kedua jika user sudah login
+          <button className="bg-gray-400 text-white px-4 py-2 rounded">
+            Logout
+          </button>
+        )}
       </nav>
+
+      <div className="p-4">
+        {/* Kondisi render pesan */}
+        {user.isLoggedIn ? (
+          user.username ? (
+            <h2>Welcome {user.username}</h2>
+          ) : (
+            <h2>Logged in. Please complete your username!</h2>
+          )
+        ) : (
+          <h2>Please login to continue</h2>
+        )}
+      </div>
     </div>
   );
 }
